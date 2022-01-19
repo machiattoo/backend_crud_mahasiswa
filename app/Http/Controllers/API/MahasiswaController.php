@@ -5,7 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Mahasiswa;
 use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use SebastianBergmann\Environment\Console;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -40,5 +42,33 @@ class MahasiswaController extends Controller
         }
 
         return response()->json($response, Response::HTTP_OK);
+    }
+
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'fullname'  => ['required', 'string', 'max:200'],
+            'username'  => ['required', 'string', 'max:100', 'unique:mahasiswas']
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(
+                $validator->errors(),
+                Response::HTTP_UNPROCESSABLE_ENTITY
+            );
+        }
+
+        try {
+            $mahasiswa = Mahasiswa::create($request->all());
+            return response()->json([
+                'message'       => 'Data mahasiswa berhasil ditambahkan',
+                'mahasiswa'     => $mahasiswa
+            ], Response::HTTP_CREATED);
+        } catch (QueryException $error) {
+            return response()->json([
+                'message'   => 'Something Wrong',
+                'error'     => $error->getMessage()
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
     }
 }

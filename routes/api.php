@@ -20,3 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('mahasiswa', [MahasiswaController::class, 'index']);
+Route::get('mahasiswa/{id}', [MahasiswaController::class, 'show']);
+Route::post('mahasiswa', [MahasiswaController::class, 'store']);
