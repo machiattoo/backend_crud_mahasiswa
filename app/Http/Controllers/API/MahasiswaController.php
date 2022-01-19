@@ -101,4 +101,21 @@ class MahasiswaController extends Controller
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
     }
+
+    public function destroy(Request $request, $id)
+    {
+        $mahasiswa = Mahasiswa::findOrFail($id);
+
+        try {
+            $mahasiswa->delete();
+            return response()->json([
+                'message'       => 'Berhasil dihapus'
+            ], Response::HTTP_OK);
+        } catch (QueryException $error) {
+            return response()->json([
+                'message'       => 'Berhasil dihapus',
+                'error'         => $error->errorInfo
+            ]);
+        }
+    }
 }

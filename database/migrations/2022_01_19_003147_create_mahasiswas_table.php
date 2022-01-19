@@ -20,7 +20,8 @@ class CreateMahasiswasTable extends Migration
             $table->string('username')->unique();
             $table->string('department')->nullable();
             $table->string('class')->nullable();
-            $table->date('birthday')->nullable();
+            $table->string('no_telp')->nullable();
+            $table->text('address')->nullable();
             $table->enum('gender', ['Male', 'Female'])->nullable();
 
             $table->softDeletes();

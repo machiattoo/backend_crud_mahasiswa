@@ -19,7 +19,9 @@ class MahasiswaSeeder extends Seeder
             'username' => 'bimanyunugrohofirmansyah',
             'department' => 'Manajemen Informatika',
             'class' => '18MIA1',
-            'gender'    => 'Male'
+            'gender'    => 'Male',
+            'no_telp'   => '081227959976',
+            'address'   => 'Jumapolo, Karanganyar'
         ]);
 
         Mahasiswa::create([
@@ -27,7 +29,9 @@ class MahasiswaSeeder extends Seeder
             'username' => 'annisaapariliasugesti',
             'department' => 'Sistem Informasi',
             'class' => '18SIA1',
-            'gender' => 'Female'
+            'gender' => 'Female',
+            'no_telp'   => '081227952344',
+            'address'   => 'Sidamukti, Depok'
         ]);
     }
 }
